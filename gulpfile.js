@@ -107,7 +107,11 @@ function delite() {
     return del('app/images/')
 }
 
-
+function htmlMin(){
+    return src('app/*.html')
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(dest('dist'));
+}
 
 //////////////////////КОНВЕРТИРОВАНИЕ ШРИФТОВ
 
@@ -189,3 +193,4 @@ exports.default = parallel(scripts, styles,watching, browser,htmlWatching,copy);
 exports.del = series(images, delite, browser);
 exports.fonts = series(ttf2woff, ttf2woff2);//ШРИФТЫ КОНВЕРТИРУЮТСЯ ИСПОЛЬЗУЯ ФУНКЦИЮ SERIES ТОЛЬКО ПОСЛЕДОВАТЕЛЬНО
 exports.build = build;
+exports.htmlMin = htmlMin;
